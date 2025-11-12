@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
     <title>Interactive Resume | Ostap Marchenko</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -109,13 +109,128 @@
             color: #fff;
         }
 
-        /* Active nav link style */
+        /* === UPDATED Navigation Link Style === */
+        
+        /* This pseudo-element creates the animated "pill" */
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #60a5fa; /* bg-primary */
+            border-radius: 0.5rem; /* rounded-lg */
+            z-index: -1;
+            opacity: 0;
+            transform: scale(0.95);
+            /* Animated transition for the pill */
+            transition: all 0.2s ease-out;
+        }
+
+        /* On hover, show a subtle blue pill */
+        .nav-link:hover::before {
+            opacity: 0.3; 
+            transform: scale(1);
+        }
+        
+        /* Active link text becomes white */
         .nav-link-active {
             color: #fff !important; /* white */
         }
-        .nav-link-active .nav-indicator {
-            width: 4rem; /* w-16 */
-            background-color: #60a5fa !important; /* bg-primary */
+        
+        /* Active link's pill is solid, bright, and glowing */
+        .nav-link-active::before {
+            opacity: 1; 
+            transform: scale(1);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+        }
+        
+        /* === NEW: AI Assistant Styles === */
+        #ai-response-area {
+            height: 300px;
+            background-color: #1e293b; /* slate-800 */
+            border-radius: 0.5rem;
+            border: 1px solid #334155; /* slate-700 */
+            padding: 1rem;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .ai-message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        
+        .ai-message.user {
+            background-color: #3b82f6; /* blue-500 */
+            color: #fff;
+            margin-left: auto;
+            border-bottom-right-radius: 0.25rem;
+        }
+        
+        .ai-message.model {
+            background-color: #334155; /* slate-700 */
+            color: #cbd5e1; /* slate-300 */
+            margin-right: auto;
+            border-bottom-left-radius: 0.25rem;
+        }
+        
+        .ai-message.error {
+            background-color: #ef4444; /* red-500 */
+            color: #fff;
+            margin-right: auto;
+            border-bottom-left-radius: 0.25rem;
+        }
+        
+        #ai-send-button {
+            background-color: #60a5fa; /* blue-400 */
+            color: #0f172a;
+            padding: 0.6rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        #ai-send-button:hover:not(:disabled) {
+            background-color: #93c5fd; /* blue-300 */
+            transform: translateY(-1px);
+        }
+        
+        #ai-send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        #ai-prompt-input {
+            background-color: #334155; /* slate-700 */
+            border: 1px solid #475569; /* slate-600 */
+            color: #fff;
+            border-radius: 0.5rem;
+            padding: 0.6rem 1rem;
+            flex-grow: 1;
+        }
+        #ai-prompt-input:focus {
+            outline: none;
+            border-color: #60a5fa; /* blue-400 */
+            box-shadow: 0 0 0 2px #60a5fa30;
+        }
+        
+        /* Loading Spinner */
+        #ai-loading {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #60a5fa30;
+            border-top-color: #60a5fa;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
     </style>
@@ -131,25 +246,33 @@
                  alt="Ostap Marchenko - Profile Picture">
             
             <h2 class="text-3xl font-bold text-white text-center">Ostap Marchenko</h2>
-            <p class="text-base text-slate-400 mt-1 text-center">Mobile Developer (iOS & Flutter)</p>
+            <p class="text-base text-slate-400 mt-1 text-center">Senior iOS Developer (Swift & Flutter)</p>
             
+            <!-- === UPDATED Navigation HTML (Order changed) === -->
             <ul class="mt-12 space-y-4" id="nav-list">
-                <li><a href="#profile" data-target="profile" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 group flex items-center">
-                    <span class="nav-indicator w-8 h-0.5 bg-slate-600 group-hover:bg-primary group-hover:w-16 transition-all duration-200 mr-3"></span>Profile
+                <li><a href="#profile" data-target="profile" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
+                    Profile
                 </a></li>
-                <li><a href="#skills" data-target="skills" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 group flex items-center">
-                    <span class="nav-indicator w-8 h-0.5 bg-slate-600 group-hover:bg-primary group-hover:w-16 transition-all duration-200 mr-3"></span>Skills
+                <li><a href="#skills" data-target="skills" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
+                    Skills
                 </a></li>
-                <li><a href="#experience" data-target="experience" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 group flex items-center">
-                    <span class="nav-indicator w-8 h-0.5 bg-slate-600 group-hover:bg-primary group-hover:w-16 transition-all duration-200 mr-3"></span>Experience
+                <li><a href="#experience" data-target="experience" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
+                    Experience
                 </a></li>
-                <li><a href="#projects" data-target="projects" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 group flex items-center">
-                    <span class="nav-indicator w-8 h-0.5 bg-slate-600 group-hover:bg-primary group-hover:w-16 transition-all duration-200 mr-3"></span>Projects
+                <li><a href="#projects" data-target="projects" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
+                    Projects
                 </a></li>
-                <li><a href="#education" data-target="education" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 group flex items-center">
-                    <span class="nav-indicator w-8 h-0.5 bg-slate-600 group-hover:bg-primary group-hover:w-16 transition-all duration-200 mr-3"></span>Education
+                <li><a href="#education" data-target="education" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
+                    Education
+                </a></li>
+                <!-- AI Assistant moved to bottom -->
+                <li><a href="#ai-assistant" data-target="ai-assistant" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
+                    AI Assistant
                 </a></li>
             </ul>
+            
+            <!-- Contact Info removed from here -->
+            
         </div>
         
         <div>
@@ -177,14 +300,14 @@
                  alt="Ostap Marchenko">
             <div>
                 <h1 class="text-xl font-bold text-white">Ostap Marchenko</h1>
-                <p class="text-sm text-slate-400">Mobile Developer (iOS & Flutter)</p>
+                <p class="text-sm text-slate-400">Senior iOS Developer (Swift & Flutter)</p>
             </div>
         </header>
 
         <!-- Content Container -->
         <div class="p-6 md:p-12 lg:p-16 max-w-5xl mx-auto">
 
-            <!-- ========== 2.2. Contact Info (Mobile) & Socials ========== -->
+            <!-- ========== 2.2. Contact Info & Socials (Moved back here) ========== -->
             <section class="mb-10 lg:mb-16">
                  <div class="flex flex-wrap gap-x-6 gap-y-3">
                     <a href="mailto:ostapmarchenko@gmail.com" class="interactive-link flex items-center text-sm font-medium text-slate-300">
@@ -207,20 +330,23 @@
                  </div>
             </section>
         
-            <!-- ========== 2.3. Profile (Summary) ========== -->
+            <!-- ========== 2.3. Profile (Summary) (UPDATED) ========== -->
             <section id="profile" class="main-section mb-10 lg:mb-16 fade-in-section bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="p-8 md:p-10">
                     <h2 class="text-2xl font-bold text-primary mb-5">Profile</h2>
                     <p class="text-base text-slate-300 leading-relaxed mb-4">
-                        As an experienced mobile developer, I bring over 7 years of commercial experience in building native iOS applications and 2+ years in cross-platform development with Flutter. My specialization is designing and implementing complex, high-performance, and scalable solutions, from SaaS platforms to consumer-focused applications.
+                        Senior iOS Developer with over 7 years of commercial experience, specializing in architecting complex, high-performance native iOS (Swift/SwiftUI) and cross-platform (Flutter) applications.
+                    </p>
+                    <p class="text-base text-slate-300 leading-relaxed mb-4">
+                        A proponent of clean, maintainable code, I am deeply proficient in applying advanced architectural patterns like VIPER, MVVM, and Clean Architecture to build scalable, testable, and robust solutions.
                     </p>
                     <p class="text-base text-slate-300 leading-relaxed">
-                        I focus on writing clean, efficient, and maintainable code, applying best architectural practices (MVVM, VIPER, Clean Architecture). My approach involves a deep understanding of the client's business goals to create products that not only work flawlessly but also provide real value to the end-user. My Upwork experience, confirmed by **Top 10% Talent** status and a **100% Job Success Rate**, demonstrates my reliability and results-driven mindset.
+                        My approach is business-goal oriented, focusing on translating client needs into flawless, intuitive user experiences. This results-driven mindset is demonstrated by a 100% Job Success Rate and Top 10% Talent status on Upwork, reflecting a proven track record of delivering tangible value.
                     </p>
                 </div>
             </section>
 
-            <!-- ========== 2.4. Skills ========== -->
+            <!-- ========== 2.4. Skills (UPDATED) ========== -->
             <section id="skills" class="main-section mb-10 lg:mb-16 fade-in-section bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="p-8 md:p-10">
                     <h2 class="text-2xl font-bold text-primary mb-6">Key Skills</h2>
@@ -230,19 +356,24 @@
                             <div class="flex flex-wrap gap-2">
                                 <span class="tech-pill">Swift</span>
                                 <span class="tech-pill">SwiftUI</span>
+                                <span class="tech-pill">UIKit</span>
                                 <span class="tech-pill">Objective-C</span>
                                 <span class="tech-pill">Flutter</span>
+                                <span class="tech-pill">Combine</span>
+                                <span class="tech-pill">Async/Await</span>
                             </div>
                         </div>
                         <div>
                             <h3 class="font-semibold text-slate-200 mb-3 text-sm uppercase tracking-wide">Architecture & Concepts</h3>
                             <div class="flex flex-wrap gap-2">
                                 <span class="tech-pill">MVVM</span>
-                                <span class="tech-pill">MVP</span>
                                 <span class="tech-pill">VIPER</span>
                                 <span class="tech-pill">Clean Architecture</span>
+                                <span class="tech-pill">TCA (Composable Architecture)</span>
+                                <span class="tech-pill">SOLID Principles</span>
+                                <span class="tech-pill">Protocol-Oriented Programming</span>
+                                <span class="tech-pill">Concurrency Patterns</span>
                                 <span class="tech-pill">Scalable Solutions</span>
-                                <span class="tech-pill">High-Performance Systems</span>
                             </div>
                         </div>
                         <div>
@@ -253,12 +384,17 @@
                                 <span class="tech-pill">Git</span>
                                 <span class="tech-pill">REST API</span>
                                 <span class="tech-pill">WebSockets</span>
-                                <span class="tech-pill">CoreData</span>
+                                <span class="tech-pill">CoreData / Realm</span>
                                 <span class="tech-pill">HealthKit</span>
+                                <span class="tech-pill">Core Location</span>
+                                <span class="tech-pill">Core Animation</span>
+                                <span class="tech-pill">Push Notifications</span>
+                                <span class="tech-pill">In-App Purchases</span>
                                 <span class="tech-pill">Stripe</span>
-                                <span class="tech-pill">PayPal</span>
                                 <span class="tech-pill">MapBox</span>
-                                <span class="tech-pill">Google Maps</span>
+                                <span class="tech-pill">Unit/UI Testing (XCTest)</span>
+                                <span class="tech-pill">CI/CD (Fastlane, GitHub Actions)</span>
+                                <span class="tech-pill">Swift Package Manager (SPM)</span>
                             </div>
                         </div>
                     </div>
@@ -288,12 +424,13 @@
                         <!-- Timeline Item 2 -->
                         <div class="timeline-item relative mb-10 fade-in-section p-4 -ml-4 rounded-lg transition-colors duration-300 hover:bg-slate-700/50">
                             <p class="text-xs uppercase font-semibold text-primary">June 2018 – October 2024</p>
-                            <h3 class="text-xl font-semibold text-slate-100 mt-1">iOS Developer</h3>
+                            <h3 class="text-xl font-semibold text-slate-100 mt-1">Senior iOS Developer</h3>
                             <p class="text-base font-medium text-slate-400">NerdzLab (Lviv)</p>
                             <ul class="mt-4 space-y-3 text-slate-400 text-sm list-disc list-outside ml-5">
-                                <li class="fade-in-item">Directed end-to-end development of native iOS applications, overseeing requirements analysis, architectural design, development, rigorous testing, and successful App Store publication.</li>
+                                <li class="fade-in-item">Directed end-to-end development of native iOS applications, overseeing requirements analysis, architectural design (VIPER, Clean Architecture), development, rigorous testing, and successful App Store publication.</li>
                                 <li class="fade-in-item">Optimized performance, resolved critical bugs, and refactored existing application code, enhancing stability and user experience across diverse industry verticals including SaaS and Healthcare.</li>
-                                <li class="fade-in-item">Implemented complex, pixel-perfect UI/UX designs, ensuring high fidelity to specifications and delivering an excellent, intuitive user experience.</li>
+                                <li class="fade-in-item">Implemented complex, pixel-perfect UI/UX designs using both UIKit and SwiftUI, ensuring high fidelity to specifications and delivering an excellent, intuitive user experience.</li>
+                                <li class="fade-in-item">Mentored junior developers, conducted code reviews, and established best practices for CI/CD pipelines and testing strategies.</li>
                                 <li class="fade-in-item">Collaborated cross-functionally with project managers, designers, and backend developers to align technical solutions with strategic business objectives and deliver impactful products.</li>
                             </ul>
                         </div>
@@ -447,9 +584,9 @@
                     </div>
                 </div>
             </section>
-
-            <!-- ========== 2.7. Education & Languages ========== -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            
+            <!-- ========== 2.7. Education & Languages (Moved up) ========== -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 lg:mb-16">
                 <section id="education" class="main-section fade-in-section">
                     <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl p-8 md:p-10 h-full transition-all duration-300 transform hover:-translate-y-1">
                         <h2 class="text-2xl font-bold text-primary mb-6">Education</h2>
@@ -474,6 +611,30 @@
                 </section>
             </div>
             
+            <!-- ========== 2.8. AI ASSISTANT SECTION (Moved to bottom) ========== -->
+            <section id="ai-assistant" class="main-section mb-10 lg:mb-16 fade-in-section">
+                <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl p-8 md:p-10 transition-all duration-300 transform hover:-translate-y-1">
+                    <h2 class="text-2xl font-bold text-primary mb-4">AI Interview Assistant</h2>
+                    <p class="text-base text-slate-400 mb-6">Ask questions about my profile, skills, or project experience. Powered by Google's Gemini model.</p>
+                    
+                    <!-- Chat Output -->
+                    <div id="ai-response-area" class="scroll-smooth">
+                        <div class="ai-message model">
+                           Hello! I'm an AI assistant. Feel free to ask me any questions about Ostap's resume, such as "What technologies did he use in the projects?".
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Input -->
+                    <div class="flex items-center gap-3">
+                        <input type="text" id="ai-prompt-input" placeholder="Ask about my experience..." class="disabled:opacity-50">
+                        <button id="ai-send-button" aria-label="Send message">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path d="M3.105 3.105a.5.5 0 01.707 0L8.5 7.793V5.5a.5.5 0 011 0v4a.5.5 0 01-.5.5H5.5a.5.5 0 010-1h2.293L3.105 3.812a.5.5 0 010-.707zM11.5 12.207V14.5a.5.5 0 01-1 0v-4a.5.5 0 01.5-.5h4a.5.5 0 010 1h-2.293l4.688 4.688a.5.5 0 010 .707l-.707.707a.5.5 0 01-.707 0L11.5 12.207z"></path></svg>
+                        </button>
+                        <div id="ai-loading" class="hidden"></div>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
     
@@ -537,7 +698,7 @@
             // === Active Nav Link on Scroll (Desktop) ===
             if (window.innerWidth >= 1024) {
                 const navLinks = document.querySelectorAll('#nav-list .nav-link');
-                const mainSections = document.querySelectorAll('.main-section');
+                const mainSections = document.querySelectorAll('.main-section'); // This will now include #ai-assistant
 
                 const onScroll = () => {
                     let currentSection = '';
@@ -562,6 +723,144 @@
                 window.addEventListener('scroll', onScroll);
                 onScroll(); // Run on page load
             }
+            
+            // === NEW: GEMINI AI ASSISTANT LOGIC ===
+            
+            const sendButton = document.getElementById('ai-send-button');
+            const promptInput = document.getElementById('ai-prompt-input');
+            const responseArea = document.getElementById('ai-response-area');
+            const loadingIndicator = document.getElementById('ai-loading');
+
+            // --- This is the context the AI will use to answer questions ---
+            // I've summarized your resume content here. (UPDATED)
+            const resumeContext = `
+                PROFILE: Senior iOS Developer with over 7 years of commercial experience, specializing in architecting complex, high-performance native iOS (Swift/SwiftUI) and cross-platform (Flutter) applications. A proponent of clean, maintainable code, I am deeply proficient in applying advanced architectural patterns like VIPER, MVVM, and Clean Architecture to build scalable, testable, and robust solutions. My approach is business-goal oriented, focusing on translating client needs into flawless, intuitive user experiences. This results-driven mindset is demonstrated by a 100% Job Success Rate and Top 10% Talent status on Upwork, reflecting a proven track record of delivering tangible value.
+                
+                SKILLS:
+                - Core: Swift, SwiftUI, UIKit, Objective-C, Flutter, Combine, Async/Await
+                - Architecture: MVVM, VIPER, Clean Architecture, TCA (Composable Architecture), SOLID Principles, Protocol-Oriented Programming, Concurrency Patterns, Scalable Solutions
+                - Tools: Xcode, Firebase, Git, REST API, WebSockets, CoreData / Realm, HealthKit, Core Location, Core Animation, Push Notifications, In-App Purchases, Stripe, MapBox, Unit/UI Testing (XCTest), CI/CD (Fastlane, GitHub Actions), Swift Package Manager (SPM)
+                
+                EXPERIENCE:
+                - Flutter Developer (Freelance, Jan 2023 - Present): Full lifecycle cross-platform (iOS/Android) development and publishing.
+                - Senior iOS Developer (NerdzLab, Jun 2018 - Oct 2024): End-to-end native iOS development, architectural design (VIPER, Clean), performance optimization (SaaS, Healthcare). Mentored junior devs, set CI/CD & testing best practices. Used UIKit & SwiftUI.
+                - iOS Developer (CyberChisel, Oct 2017 - Jun 2018): Feature development and maintenance, focusing on clean code.
+                - iOS Developer (2Event, Apr 2017 - Oct 2017): Developed features for event management platform, integrated APIs, push notifications.
+                
+                PROJECTS (Selection from 20+):
+                - Hubmee: iOS client for personal organizer (calendar, notes, tasks, chat, AI, finance).
+                - Social Games (Mafia, Werewolf): Client-server mobile games, state sync via WebSockets.
+                - WordDuo: Micro-puzzle game.
+                - Construction Clock: GPS time tracker with background geolocation.
+                - RASHAKAN: Personal wellness guide with HealthKit integration.
+                - WHATSALON & GO: B2C/B2B ecosystem for salon booking with Stripe/PayPal.
+                - Truvay: Social rating app for places with MapBox/Google Maps.
+                
+                EDUCATION: Engineer, Rzeszów University of Technology (2012-2014).
+                
+                LANGUAGES: Ukrainian (Native), English (Professional), Polish (Conversational).
+            `;
+            // --- End of resume context ---
+
+            const systemPrompt = `You are a professional AI assistant for Ostap Marchenko's interactive resume. Your role is to answer questions from recruiters and hiring managers based *only* on the information provided in the following resume context. Do not invent information or answer questions outside this context. If a question is off-topic (e.g., 'what is the weather?'), politely decline and redirect the user to ask about Ostap's skills or experience.
+            
+            RESUME CONTEXT:
+            ${resumeContext}`;
+
+            const apiKey = ""; // API key will be injected by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            // --- Helper Functions ---
+            
+            function toggleLoading(isLoading) {
+                if (isLoading) {
+                    loadingIndicator.classList.remove('hidden');
+                    sendButton.disabled = true;
+                    promptInput.disabled = true;
+                } else {
+                    loadingIndicator.classList.add('hidden');
+                    sendButton.disabled = false;
+                    promptInput.disabled = false;
+                    promptInput.focus();
+                }
+            }
+            
+            function addMessage(role, text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('ai-message', role);
+                messageDiv.textContent = text;
+                responseArea.appendChild(messageDiv);
+                // Scroll to bottom
+                responseArea.scrollTop = responseArea.scrollHeight;
+            }
+
+            async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+                try {
+                    return await fetch(url, options);
+                } catch (err) {
+                    if (retries === 1) throw err;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithRetry(url, options, retries - 1, delay * 2);
+                }
+            }
+
+            // --- Main API Call Function ---
+            async function callGeminiApi(userQuery) {
+                toggleLoading(true);
+                addMessage('user', userQuery);
+                
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+
+                try {
+                    const response = await fetchWithRetry(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        const modelText = candidate.content.parts[0].text;
+                        addMessage('model', modelText);
+                    } else {
+                        addMessage('error', 'Error: Could not parse the AI response. Please try again.');
+                    }
+
+                } catch (error) {
+                    console.error("Gemini API call failed:", error);
+                    addMessage('error', 'Sorry, I ran into an error. Please check your network connection or try again later.');
+                } finally {
+                    toggleLoading(false);
+                }
+            }
+
+            // --- Event Listeners ---
+            sendButton.addEventListener('click', () => {
+                const query = promptInput.value.trim();
+                if (query) {
+                    callGeminiApi(query);
+                    promptInput.value = '';
+                }
+            });
+            
+            promptInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendButton.click();
+                }
+            });
+            
         });
     </script>
 

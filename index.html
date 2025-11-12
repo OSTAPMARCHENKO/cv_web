@@ -125,10 +125,15 @@
     <!-- ========== 1. Side Navigation (Desktop) ========== -->
     <nav class="sticky top-0 h-screen w-72 flex-shrink-0 p-8 lg:p-10 hidden lg:flex flex-col justify-between bg-slate-800 shadow-xl">
         <div>
-            <h2 class="text-3xl font-bold text-white">Ostap Marchenko</h2>
-            <p class="text-base text-slate-400 mt-1">Mobile Developer (iOS & Flutter)</p>
+            <!-- !!! ADD YOUR IMAGE URL HERE !!! -->
+            <img class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-slate-700 shadow-lg" 
+                 src="https://placehold.co/100x100/60a5fa/0f172a?text=OM" 
+                 alt="Ostap Marchenko - Profile Picture">
             
-            <ul class="mt-16 space-y-4" id="nav-list">
+            <h2 class="text-3xl font-bold text-white text-center">Ostap Marchenko</h2>
+            <p class="text-base text-slate-400 mt-1 text-center">Mobile Developer (iOS & Flutter)</p>
+            
+            <ul class="mt-12 space-y-4" id="nav-list">
                 <li><a href="#profile" data-target="profile" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 group flex items-center">
                     <span class="nav-indicator w-8 h-0.5 bg-slate-600 group-hover:bg-primary group-hover:w-16 transition-all duration-200 mr-3"></span>Profile
                 </a></li>
@@ -165,9 +170,15 @@
     <main class="flex-1 min-w-0">
     
         <!-- ========== 2.1. Mobile Header ========== -->
-        <header class="lg:hidden p-4 bg-slate-800/80 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
-            <h1 class="text-xl font-bold text-white">Ostap Marchenko</h1>
-            <p class="text-sm text-slate-400">Mobile Developer (iOS & Flutter)</p>
+        <header class="lg:hidden p-4 bg-slate-800/80 backdrop-blur-sm sticky top-0 z-50 shadow-lg flex items-center space-x-4">
+            <!-- !!! ADD YOUR IMAGE URL HERE !!! -->
+            <img class="w-12 h-12 rounded-full border-2 border-slate-700 flex-shrink-0" 
+                 src="https://placehold.co/100x100/60a5fa/0f172a?text=OM" 
+                 alt="Ostap Marchenko">
+            <div>
+                <h1 class="text-xl font-bold text-white">Ostap Marchenko</h1>
+                <p class="text-sm text-slate-400">Mobile Developer (iOS & Flutter)</p>
+            </div>
         </header>
 
         <!-- Content Container -->

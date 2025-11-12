@@ -265,10 +265,6 @@
                 <li><a href="#education" data-target="education" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
                     Education
                 </a></li>
-                <!-- AI Assistant moved to bottom -->
-                <li><a href="#ai-assistant" data-target="ai-assistant" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
-                    AI Assistant
-                </a></li>
             </ul>
             
             <!-- Contact Info removed from here -->
@@ -610,31 +606,6 @@
                     </div>
                 </section>
             </div>
-            
-            <!-- ========== 2.8. AI ASSISTANT SECTION (Moved to bottom) ========== -->
-            <section id="ai-assistant" class="main-section mb-10 lg:mb-16 fade-in-section">
-                <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl p-8 md:p-10 transition-all duration-300 transform hover:-translate-y-1">
-                    <h2 class="text-2xl font-bold text-primary mb-4">AI Interview Assistant</h2>
-                    <p class="text-base text-slate-400 mb-6">Ask questions about my profile, skills, or project experience. Powered by Google's Gemini model.</p>
-                    
-                    <!-- Chat Output -->
-                    <div id="ai-response-area" class="scroll-smooth">
-                        <div class="ai-message model">
-                           Hello! I'm an AI assistant. Feel free to ask me any questions about Ostap's resume, such as "What technologies did he use in the projects?".
-                        </div>
-                    </div>
-                    
-                    <!-- Chat Input -->
-                    <div class="flex items-center gap-3">
-                        <input type="text" id="ai-prompt-input" placeholder="Ask about my experience..." class="disabled:opacity-50">
-                        <button id="ai-send-button" aria-label="Send message">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path d="M3.105 3.105a.5.5 0 01.707 0L8.5 7.793V5.5a.5.5 0 011 0v4a.5.5 0 01-.5.5H5.5a.5.5 0 010-1h2.293L3.105 3.812a.5.5 0 010-.707zM11.5 12.207V14.5a.5.5 0 01-1 0v-4a.5.5 0 01.5-.5h4a.5.5 0 010 1h-2.293l4.688 4.688a.5.5 0 010 .707l-.707.707a.5.5 0 01-.707 0L11.5 12.207z"></path></svg>
-                        </button>
-                        <div id="ai-loading" class="hidden"></div>
-                    </div>
-                </div>
-            </section>
-
         </div>
     </main>
     

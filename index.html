@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale-1.0">
     <title>Interactive Resume | Ostap Marchenko</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -88,16 +86,52 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* Interactive link hover effect */
+        /* Interactive Link (Contact Buttons) */
         .interactive-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: rgba(51, 65, 85, 0.5); /* slate-700 with opacity */
+            border: 1px solid rgba(71, 85, 105, 0.6); /* slate-600 with opacity */
+            border-radius: 0.5rem;
             transition: all 0.2s ease-out;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
         }
+        
         .interactive-link:hover {
             transform: translateY(-2px);
+            background-color: rgba(96, 165, 250, 0.15); /* Light blue bg hint */
+            border-color: #60a5fa;
             color: #fff; /* white */
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);
         }
+        
         .interactive-link:hover svg {
-            color: #93c5fd; /* blue-300 */
+            color: #60a5fa; /* blue-400 */
+        }
+
+        /* App Store Button Style */
+        .app-store-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            background-color: rgba(30, 41, 59, 0.8); /* slate-800 */
+            border: 1px solid #475569; /* slate-600 */
+            color: #60a5fa; /* primary */
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-top: auto; /* Push to bottom of flex container */
+        }
+        .app-store-btn:hover {
+            background-color: #60a5fa;
+            color: #0f172a; /* slate-900 */
+            border-color: #60a5fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
         }
         
         /* Desktop Social Icon hover */
@@ -109,9 +143,7 @@
             color: #fff;
         }
 
-        /* === UPDATED Navigation Link Style === */
-        
-        /* This pseudo-element creates the animated "pill" */
+        /* === Navigation Link Style === */
         .nav-link::before {
             content: '';
             position: absolute;
@@ -124,29 +156,25 @@
             z-index: -1;
             opacity: 0;
             transform: scale(0.95);
-            /* Animated transition for the pill */
             transition: all 0.2s ease-out;
         }
 
-        /* On hover, show a subtle blue pill */
         .nav-link:hover::before {
-            opacity: 0.3; 
+            opacity: 0.3;
             transform: scale(1);
         }
         
-        /* Active link text becomes white */
         .nav-link-active {
-            color: #fff !important; /* white */
+            color: #fff !important;
         }
         
-        /* Active link's pill is solid, bright, and glowing */
         .nav-link-active::before {
-            opacity: 1; 
+            opacity: 1;
             transform: scale(1);
             box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
         }
         
-        /* === NEW: AI Assistant Styles === */
+        /* === AI Assistant Styles === */
         #ai-response-area {
             height: 300px;
             background-color: #1e293b; /* slate-800 */
@@ -237,21 +265,18 @@
 </head>
 <body class="flex flex-col lg:flex-row">
 
-    <!-- ========== 1. Side Navigation (Desktop) ========== -->
     <nav class="sticky top-0 h-screen w-72 flex-shrink-0 p-8 lg:p-10 hidden lg:flex flex-col justify-between bg-slate-800 shadow-xl">
         <div>
-            <!-- !!! ADD YOUR IMAGE URL HERE !!! -->
             <img class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-slate-700 shadow-lg" 
                  src="https://placehold.co/100x100/60a5fa/0f172a?text=OM" 
                  alt="Ostap Marchenko - Profile Picture">
             
             <h2 class="text-3xl font-bold text-white text-center">Ostap Marchenko</h2>
-            <p class="text-base text-slate-400 mt-1 text-center">Senior iOS Developer (Swift & Flutter)</p>
+            <p class="text-base text-slate-400 mt-1 text-center">iOS Developer with Flutter experience</p>
             
-            <!-- === UPDATED Navigation HTML (Order changed) === -->
             <ul class="mt-12 space-y-4" id="nav-list">
                 <li><a href="#profile" data-target="profile" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
-                    Profile
+                     Profile
                 </a></li>
                 <li><a href="#skills" data-target="skills" class="nav-link font-semibold text-slate-400 hover:text-white transition-colors duration-200 relative z-10 py-1 px-3 -mx-3 -my-1 rounded-lg">
                     Skills
@@ -266,13 +291,9 @@
                     Education
                 </a></li>
             </ul>
-            
-            <!-- Contact Info removed from here -->
-            
         </div>
         
         <div>
-            <!-- Contact Icons for Desktop -->
             <div class="flex space-x-3">
                 <a href="https://www.linkedin.com/in/ostap-marchenko-258585142/" target="_blank" rel="noopener noreferrer" class="social-icon text-slate-400 hover:text-white" aria-label="LinkedIn">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -285,64 +306,56 @@
         </div>
     </nav>
     
-    <!-- ========== 2. Main Content ========== -->
     <main class="flex-1 min-w-0">
     
-        <!-- ========== 2.1. Mobile Header ========== -->
         <header class="lg:hidden p-4 bg-slate-800/80 backdrop-blur-sm sticky top-0 z-50 shadow-lg flex items-center space-x-4">
-            <!-- !!! ADD YOUR IMAGE URL HERE !!! -->
             <img class="w-12 h-12 rounded-full border-2 border-slate-700 flex-shrink-0" 
                  src="https://placehold.co/100x100/60a5fa/0f172a?text=OM" 
                  alt="Ostap Marchenko">
             <div>
                 <h1 class="text-xl font-bold text-white">Ostap Marchenko</h1>
-                <p class="text-sm text-slate-400">Senior iOS Developer (Swift & Flutter)</p>
+                <p class="text-sm text-slate-400">iOS Developer with Flutter experience</p>
             </div>
         </header>
 
-        <!-- Content Container -->
         <div class="p-6 md:p-12 lg:p-16 max-w-5xl mx-auto">
 
-            <!-- ========== 2.2. Contact Info & Socials (Moved back here) ========== -->
             <section class="mb-10 lg:mb-16">
-                 <div class="flex flex-wrap gap-x-6 gap-y-3">
-                    <a href="mailto:ostapmarchenko@gmail.com" class="interactive-link flex items-center text-sm font-medium text-slate-300">
+                 <div class="flex flex-wrap gap-2">
+                    <a href="mailto:ostapmarchenko@gmail.com" class="interactive-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-1.5 text-primary/70 transition-colors"><path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.161V6a2 2 0 00-2-2H3z"></path><path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"></path></svg>
                         ostapmarchenko@gmail.com
                     </a>
-                    <a href="tel:+380734814881" class="interactive-link flex items-center text-sm font-medium text-slate-300">
+                    <a href="tel:+380734814881" class="interactive-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-1.5 text-primary/70 transition-colors"><path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.067a1.5 1.5 0 01-1.114 1.77l-1.076.36a.5.5 0 00-.29.47l.013.242a13.9 13.9 0 007.494 7.494l.242.013a.5.5 0 00.47-.29l.36-1.076a1.5 1.5 0 011.77-1.114l3.067.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5h-1.5A13.5 13.5 0 012 3.5z" clip-rule="evenodd"></path></svg>
                         +380734814881
                     </a>
-                    <!-- Socials visible on all screens -->
-                    <a href="https://www.linkedin.com/in/ostap-marchenko-258585142/" target="_blank" rel="noopener noreferrer" class="interactive-link flex items-center text-sm font-medium text-slate-300">
+                    <a href="https://www.linkedin.com/in/ostap-marchenko-258585142/" target="_blank" rel="noopener noreferrer" class="interactive-link">
                         <svg class="w-5 h-5 mr-1.5 text-primary/70 transition-colors" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         LinkedIn
                     </a>
-                    <a href="https://www.upwork.com/freelancers/ostapmarchenko" target="_blank" rel="noopener noreferrer" class="interactive-link flex items-center text-sm font-medium text-slate-300">
+                    <a href="https://www.upwork.com/freelancers/ostapmarchenko" target="_blank" rel="noopener noreferrer" class="interactive-link">
                         <svg class="w-5 h-5 mr-1.5 text-primary/70 transition-colors" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.43 8.17c-1.2 0-2.3.38-3.23.95l-.3-.02c2.1-2.2 2.6-5.18.92-6.95-1.12-1.1-2.8-1.4-4.32-1.13-.05 0-.1.02-.14.04-1.6.28-3 1.25-3.6 2.5-.62 1.26-.6 2.8-.1 4.2l-.08.05c-1.3-1.04-2.87-1.4-4.46-1.1-.9.18-1.7.6-2.3 1.2-.6.6-.9 1.4-.9 2.3v.08c0 1.28.6 2.45 1.6 3.1l.12.08c-1 2.35-.3 5 1.5 6.8s4.3 2.8 6.6 2.3c.3-.06.6-.15.86-.27l.12-.05.1.12c.94 1.1 2.2 1.7 3.5 1.7 1.1 0 2.1-.4 2.9-1.2s1.2-1.8 1.2-2.9c0-1.1-.4-2.1-1.2-2.9s-1.8-1.2-2.9-1.2c-.2 0-.4 0-.6.03l-.1-.02c2.4-2.1 3.1-5.3 1.8-7.9zm-1.1 9.4c.4.4.6.9.6 1.5s-.2 1.1-.6 1.5-.9.6-1.5.6-1.1-.2-1.5-.6-.6-.9-.6-1.5.2-1.1.6-1.5.9-.6 1.5-.6 1.1.2 1.5.6zM6.63 18.2c-1.1-.7-1.8-1.8-1.8-3v-.1c.1-1.6 1.1-3 2.6-3.7l.4-.15c.14.3.3.6.48.88l.3.45c-1.1.7-1.7 1.8-1.6 2.9v.04c0 .2 0 .4.04.6l.08.3c-.3.2-.6.4-.9.6zm8.27-1.9c-2 .5-4.2-.2-5.5-1.8-.1-.13-.2-.27-.28-.4-.9-1.2-1.2-2.6-1.1-4l.02-.27c.2-2.5 1.7-4.6 3.8-5.7.8-.4 1.6-.6 2.5-.6.9 0 1.8.2 2.6.6.7.3 1.3.8 1.8 1.4.5.6.9 1.3 1.1 2.1s.2 1.6 0 2.4c-.2.8-.5 1.5-.9 2.1-.4.6-.9 1.1-1.5 1.5s-1.2.7-1.9.9z"/></svg>
                         Upwork (Top 10% Talent)
                     </a>
                  </div>
             </section>
         
-            <!-- ========== 2.3. Profile (Summary) (UPDATED) ========== -->
             <section id="profile" class="main-section mb-10 lg:mb-16 fade-in-section bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="p-8 md:p-10">
                     <h2 class="text-2xl font-bold text-primary mb-5">Profile</h2>
                     <p class="text-base text-slate-300 leading-relaxed mb-4">
-                        Senior iOS Developer with over 7 years of commercial experience, specializing in architecting complex, high-performance native iOS (Swift/SwiftUI) and cross-platform (Flutter) applications.
+                        Results-oriented Senior iOS Engineer with 7+ years of experience in architecting scalable, high-performance mobile ecosystems. I specialize in designing modular architectures (MVP, MVVM, VIPER, Clean Architecture) for large-scale applications, ensuring long-term maintainability and seamless extensibility for cross-functional teams.
                     </p>
                     <p class="text-base text-slate-300 leading-relaxed mb-4">
-                        A proponent of clean, maintainable code, I am deeply proficient in applying advanced architectural patterns like VIPER, MVVM, and Clean Architecture to build scalable, testable, and robust solutions.
+                        My expertise extends beyond coding to technical leadership: defining development roadmaps, conducting advanced code reviews, and optimizing CI/CD pipelines to reduce time-to-market. I have a proven track record of solving complex engineering challenges—from synchronizing real-time data via WebSockets to implementing offline-first logic and optimizing memory usage for crash-free user experiences.
                     </p>
                     <p class="text-base text-slate-300 leading-relaxed">
-                        My approach is business-goal oriented, focusing on translating client needs into flawless, intuitive user experiences. This results-driven mindset is demonstrated by a 100% Job Success Rate and Top 10% Talent status on Upwork, reflecting a proven track record of delivering tangible value.
+                        Whether building native Swift solutions or cross-platform Flutter apps, I focus on aligning technical excellence with business KPIs. Recognized as Top 10% Talent on Upwork with a 100% Job Success Rate, demonstrating reliability and high-quality delivery.
                     </p>
                 </div>
             </section>
 
-            <!-- ========== 2.4. Skills (UPDATED) ========== -->
             <section id="skills" class="main-section mb-10 lg:mb-16 fade-in-section bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="p-8 md:p-10">
                     <h2 class="text-2xl font-bold text-primary mb-6">Key Skills</h2>
@@ -397,16 +410,12 @@
                 </div>
             </section>
 
-            <!-- ========== 2.5. Experience ========== -->
             <section id="experience" class="main-section mb-10 lg:mb-16 fade-in-section">
                 <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl p-8 md:p-10">
                     <h2 class="text-2xl font-bold text-primary mb-10">Work Experience</h2>
-                    <!-- Timeline Container -->
                     <div class="relative pl-11">
-                        <!-- The timeline bar -->
                         <div class="absolute left-0 top-0 h-full w-0.5 bg-slate-700" style="left: 20px;"></div>
                         
-                        <!-- Timeline Item 1 -->
                         <div class="timeline-item relative mb-10 fade-in-section p-4 -ml-4 rounded-lg transition-colors duration-300 hover:bg-slate-700/50">
                             <p class="text-xs uppercase font-semibold text-primary">January 2023 – Present</p>
                             <h3 class="text-xl font-semibold text-slate-100 mt-1">Flutter Developer</h3>
@@ -417,13 +426,12 @@
                             </ul>
                         </div>
 
-                        <!-- Timeline Item 2 -->
                         <div class="timeline-item relative mb-10 fade-in-section p-4 -ml-4 rounded-lg transition-colors duration-300 hover:bg-slate-700/50">
                             <p class="text-xs uppercase font-semibold text-primary">June 2018 – October 2024</p>
                             <h3 class="text-xl font-semibold text-slate-100 mt-1">Senior iOS Developer</h3>
                             <p class="text-base font-medium text-slate-400">NerdzLab (Lviv)</p>
                             <ul class="mt-4 space-y-3 text-slate-400 text-sm list-disc list-outside ml-5">
-                                <li class="fade-in-item">Directed end-to-end development of native iOS applications, overseeing requirements analysis, architectural design (VIPER, Clean Architecture), development, rigorous testing, and successful App Store publication.</li>
+                                <li class="fade-in-item">Directed end-to-end development of native iOS applications, overseeing requirements analysis, architectural design (MVP, MVVM, VIPER, Clean Architecture), development, rigorous testing, and successful App Store publication.</li>
                                 <li class="fade-in-item">Optimized performance, resolved critical bugs, and refactored existing application code, enhancing stability and user experience across diverse industry verticals including SaaS and Healthcare.</li>
                                 <li class="fade-in-item">Implemented complex, pixel-perfect UI/UX designs using both UIKit and SwiftUI, ensuring high fidelity to specifications and delivering an excellent, intuitive user experience.</li>
                                 <li class="fade-in-item">Mentored junior developers, conducted code reviews, and established best practices for CI/CD pipelines and testing strategies.</li>
@@ -431,7 +439,6 @@
                             </ul>
                         </div>
 
-                        <!-- Timeline Item 3 -->
                         <div class="timeline-item relative mb-10 fade-in-section p-4 -ml-4 rounded-lg transition-colors duration-300 hover:bg-slate-700/50">
                             <p class="text-xs uppercase font-semibold text-primary">October 2017 – June 2018</p>
                             <h3 class="text-xl font-semibold text-slate-100 mt-1">iOS Developer</h3>
@@ -442,7 +449,6 @@
                             </ul>
                         </div>
 
-                        <!-- Timeline Item 4 -->
                         <div class="timeline-item relative fade-in-section p-4 -ml-4 rounded-lg transition-colors duration-300 hover:bg-slate-700/50">
                             <p class="text-xs uppercase font-semibold text-primary">April 2017 – October 2017</p>
                             <h3 class="text-xl font-semibold text-slate-100 mt-1">iOS Developer</h3>
@@ -458,130 +464,212 @@
                 </div>
             </section>
 
-            <!-- ========== 2.6. Projects ========== -->
             <section id="projects" class="main-section mb-10 lg:mb-16 fade-in-section">
                 <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl p-8 md:p-10">
-                    <h2 class="text-2xl font-bold text-primary mb-4">Project Showcase (Selection)</h2>
-                    <p class="text-base text-slate-400 mb-10">Here is a selection from over 20 commercial projects I have delivered, highlighting a range of technologies and complex problem-solving.</p>
+                    <h2 class="text-2xl font-bold text-primary mb-10">Projects Showcase</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         
-                        <!-- Project Card 1 -->
-                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1">
-                            <h3 class="text-lg font-semibold text-slate-100 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-                                Hubmee
+                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                                Hubmee (Personal manager)
                             </h3>
-                            <p class="text-sm text-slate-400 mt-2 leading-relaxed flex-1">
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
                                 Played a key role in developing the iOS client for Hubmee, a comprehensive organizer acting as a "personal manager". I was responsible for implementing calendar, notes, tasks, chats, AI integration, and finance features, including a complex document manager and a reliable reminder system.
                             </p>
-                            <div class="mt-4 flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-6">
                                 <span class="tech-pill">Swift</span>
+                                <span class="tech-pill">SwiftUI</span>
+                                <span class="tech-pill">WebSockets</span>
+                                <span class="tech-pill">Google Integration</span>
                                 <span class="tech-pill">AI Integration</span>
-                                <span class="tech-pill">Finance</span>
+                                <span class="tech-pill">Firebase</span>
+                                <span class="tech-pill">CI/CD</span>
+                                <span class="tech-pill">REST API</span>
                             </div>
+                            <a href="https://apps.apple.com/ua/app/hubmee-life-home-manager/id1357144691" target="_blank" rel="noopener noreferrer" class="app-store-btn">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                View on App Store
+                            </a>
                         </div>
 
-                        <!-- Project Card 2 -->
-                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1">
-                            <h3 class="text-lg font-semibold text-slate-100 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2 1m2-1l-2-1m2 1V7M3 12l2 1m-2-1l2-1m-2 1v2.5M7 16l2 1M7 16l-2 1M7 16v-2.5M14 16l2 1m-2-1l-2 1m2-1v-2.5m6 0l2 1m-2-1l2-1m-2 1v2.5" /></svg>
-                                Social Games (Mafia, Werewolf)
+                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                GCTV
                             </h3>
-                            <p class="text-sm text-slate-400 mt-2 leading-relaxed flex-1">
-                                Developed a series of mobile games (Mafia, Werewolf, Avalon, Resistance). Created client-server games for groups. The key challenge was implementing stable and fast game state synchronization among all players via WebSockets.
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
+                                I worked on video streaming and the player, in-app subscriptions, API integration, event schedules, UI/UX screens, caching, authentication, and ensuring stable performance for both live and on-demand content.
                             </p>
-                            <div class="mt-4 flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-6">
                                 <span class="tech-pill">Swift</span>
                                 <span class="tech-pill">WebSockets</span>
-                                <span class="tech-pill">Real-time</span>
+                                <span class="tech-pill">Video Streaming</span>
+                                <span class="tech-pill">REST API</span>
                             </div>
+                            <a href="https://apps.apple.com/ua/app/gctv/id1565387424" target="_blank" rel="noopener noreferrer" class="app-store-btn">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                View on App Store
+                            </a>
                         </div>
 
-                        <!-- Project Card 3 -->
-                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1">
-                            <h3 class="text-lg font-semibold text-slate-100 flex items-center">
+                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                ConstructionClock Time tracker
+                            </h3>
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
+                                I worked on GPS-based automatic time-tracking, automatic clock-in/out (when team enters/leaves a job site), tracking travel time, real-time hours by employee/crew/project, project management UI, payroll/timesheet export, and background location tracking.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-pill">Swift</span>
+                                <span class="tech-pill">PDF generation</span>
+                                <span class="tech-pill">Location tracking</span>
+                                <span class="tech-pill">Offline mode</span>
+                                <span class="tech-pill">REST API</span>
+                            </div>
+                            <a href="https://apps.apple.com/ua/app/constructionclock-time-tracker/id1579080789" target="_blank" rel="noopener noreferrer" class="app-store-btn">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                View on App Store
+                            </a>
+                        </div>
+
+                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 011 1v1a2 2 0 104 0V5a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3z" /></svg>
                                 WordDuo
                             </h3>
-                            <p class="text-sm text-slate-400 mt-2 leading-relaxed flex-1">
-                                Developed a fast-paced micro-puzzle game optimized for short game sessions and immediate engagement.
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
+                                I worked on the word-puzzle logic, UI for grid and clue display, in-app purchases (coins), supporting multiple puzzle modes (“Duplets”, “Anagram”, new “Quads”), state management, performance and game flow.
                             </p>
-                            <div class="mt-4 flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-6">
                                 <span class="tech-pill">Swift</span>
-                                <span class="tech-pill">Game Logic</span>
+                                <span class="tech-pill">Firebase</span>
+                                <span class="tech-pill">Game Engine</span>
+                                <span class="tech-pill">Ads integration</span>
+                                <span class="tech-pill">IAP</span>
+                                <span class="tech-pill">REST API</span>
                             </div>
-                        </div>
-
-                        <!-- Project Card 4 -->
-                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1">
-                            <h3 class="text-lg font-semibold text-slate-100 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                Construction Clock
-                            </h3>
-                            <p class="text-sm text-slate-400 mt-2 leading-relaxed flex-1">
-                                Created a GPS time tracker for construction companies. The app automates report submission and schedule management using background geolocation for accurate time tracking, optimizing document flow and payroll calculations.
-                            </p>
-                            <div class="mt-4 flex flex-wrap gap-2">
-                                <span class="tech-pill">Swift</span>
-                                <span class="tech-pill">GPS</span>
-                                <span class="tech-pill">Background Services</span>
-                            </div>
+                            <a href="https://apps.apple.com/ua/app/word-duo-crosswords-game/id1636284090" target="_blank" rel="noopener noreferrer" class="app-store-btn">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                View on App Store
+                            </a>
                         </div>
                         
-                        <!-- Project Card 5 -->
-                         <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1">
-                            <h3 class="text-lg font-semibold text-slate-100 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                                RASHAKAN
-                            </h3>
-                            <p class="text-sm text-slate-400 mt-2 leading-relaxed flex-1">
-                                Contributed to a personal wellness guide that provides users with personalized recommendations by analyzing input data. I was responsible for integrating with HealthKit to collect and synchronize health data for accurate progress tracking.
-                            </p>
-                             <div class="mt-4 flex flex-wrap gap-2">
-                                <span class="tech-pill">Swift</span>
-                                <span class="tech-pill">HealthKit</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Project Card 6 -->
-                         <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1">
-                            <h3 class="text-lg font-semibold text-slate-100 flex items-center">
+                        <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                 WHATSALON & GO
                             </h3>
-                            <p class="text-sm text-slate-400 mt-2 leading-relaxed flex-1">
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
                                 Developed an ecosystem of two apps: a B2C marketplace for clients (search, reviews, booking) and a B2B tool for salon owners. The B2B app included complex logic for managing bookings, a client base, and integration with Stripe/PayPal.
                             </p>
-                             <div class="mt-4 flex flex-wrap gap-2">
+                            <div class="flex flex-wrap gap-2 mb-6">
                                 <span class="tech-pill">Swift</span>
-                                <span class="tech-pill">Stripe</span>
-                                <span class="tech-pill">PayPal</span>
-                                <span class="tech-pill">B2B/B2C</span>
+                                <span class="tech-pill">Stripe/PayPal</span>
+                                <span class="tech-pill">Firebase</span>
+                                <span class="tech-pill">WebSockets</span>
+                                <span class="tech-pill">Subscriptions</span>
+                                <span class="tech-pill">REST API</span>
+                            </div>
+                            </div>
+
+                         <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                Mafia, Werewolf, Avalon
+                            </h3>
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
+                                Developed a series of mobile games (Mafia, Werewolf, Avalon, Resistance). Created client-server games for groups. The key challenge was implementing stable and fast game state synchronization among all players from end to end.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-pill">Swift</span>
+                                <span class="tech-pill">WebSockets</span>
+                                <span class="tech-pill">IAP</span>
+                                <span class="tech-pill">Voice Integration</span>
+                                <span class="tech-pill">REST API</span>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-auto">
+                                <a href="https://apps.apple.com/ua/app/avalon-offline-party-games-irl/id1536756554" target="_blank" rel="noopener noreferrer" class="app-store-btn !justify-start !text-xs">
+                                    <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                    Avalon
+                                </a>
+                                <a href="https://apps.apple.com/ua/app/werewolf-offline-party-games/id1536899372" target="_blank" rel="noopener noreferrer" class="app-store-btn !justify-start !text-xs">
+                                     <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                    Werewolf
+                                </a>
+                                <a href="https://apps.apple.com/ua/app/resistance-offline-party-games/id1536907782" target="_blank" rel="noopener noreferrer" class="app-store-btn !justify-start !text-xs">
+                                     <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                    Resistance
+                                </a>
                             </div>
                         </div>
-                        
-                        <!-- Project Card 7 -->
-                         <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1">
-                            <h3 class="text-lg font-semibold text-slate-100 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13v-6m0 6l5.447-2.724A1 1 0 0015 16.382V5.618a1 1 0 00-1.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447-2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m0 10v-6m0 6l-6-3" /></svg>
-                                Truvay
+
+                         <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                InvoiceBear
                             </h3>
-                            <p class="text-sm text-slate-400 mt-2 leading-relaxed flex-1">
-                                Developed an app for social rating of places (restaurants, attractions) worldwide. Implemented complex map interaction (MapBox/Google Maps), search by categories, and a system for creating, viewing, and rating user-generated content.
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
+                                I worked on invoice creation, estimates, and billing flows, document generation (PDF invoices/estimates), custom branding, client & invoice management, payment-links integration, automatic reminders and notifications.
                             </p>
-                             <div class="mt-4 flex flex-wrap gap-2">
-                                <span class="tech-pill">Swift</span>
-                                <span class="tech-pill">MapBox</span>
-                                <span class="tech-pill">Google Maps</span>
-                                <span class="tech-pill">UGC</span>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-pill">SwiftUI</span>
+                                <span class="tech-pill">Stripe</span>
+                                <span class="tech-pill">Subscriptions</span>
+                                <span class="tech-pill">REST API</span>
                             </div>
+                            <a href="https://apps.apple.com/us/app/invoice-bear-invoice-maker/id6689523594" target="_blank" rel="noopener noreferrer" class="app-store-btn">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                View on App Store
+                            </a>
+                        </div>
+
+                         <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                LeMall Lebanon
+                            </h3>
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
+                                I implemented store/restaurant directory and map, events & cinema listings, promotions/offers section, digital-loyalty program, movie-trailers, UI/UX, updating backend data, and handling location-based services.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-pill">Swift</span>
+                                <span class="tech-pill">REST API</span>
+                                <span class="tech-pill">Booking</span>
+                            </div>
+                            <a href="https://apps.apple.com/ua/app/lemall-lebanon/id443822540" target="_blank" rel="noopener noreferrer" class="app-store-btn">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                View on App Store
+                            </a>
+                        </div>
+
+                         <div class="flex flex-col bg-slate-700 p-6 rounded-lg border border-slate-600/80 hover:shadow-xl hover:shadow-primary/20 hover:border-primary transition-all duration-300 fade-in-section group transform hover:-translate-y-1 h-full">
+                            <h3 class="text-lg font-semibold text-slate-100 flex items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
+                                2Events
+                            </h3>
+                            <p class="text-sm text-slate-400 mb-4 leading-relaxed flex-grow">
+                                Implementing ticket-sale flows, event listings, user registration/authorization, social features (chat, attendee lists, meetups), travel-mate & roommate search, and tools for event organizers (QR-ticket support, push-notifications).
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-pill">Swift</span>
+                                <span class="tech-pill">Objective-C</span>
+                                <span class="tech-pill">REST API</span>
+                                <span class="tech-pill">Booking</span>
+                                <span class="tech-pill">QR</span>
+                                <span class="tech-pill">Tickets</span>
+                            </div>
+                            <a href="https://apps.apple.com/us/app/2event/id786811811" target="_blank" rel="noopener noreferrer" class="app-store-btn">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.3-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.96 1.08-3.11-1.06.05-2.32.71-3.07 1.62-.66.8-1.24 2.05-1.08 3.15 1.19.09 2.42-.83 3.07-1.66z"/></svg>
+                                View on App Store
+                            </a>
                         </div>
 
                     </div>
                 </div>
             </section>
             
-            <!-- ========== 2.7. Education & Languages (Moved up) ========== -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 lg:mb-16">
                 <section id="education" class="main-section fade-in-section">
                     <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 shadow-xl rounded-xl p-8 md:p-10 h-full transition-all duration-300 transform hover:-translate-y-1">
@@ -638,11 +726,9 @@
             }, {
                 threshold: 0.1 // Trigger when 10% of the element is visible
             });
-
             sections.forEach(section => {
                 observer.observe(section);
             });
-            
 
             // === Smooth scrolling for anchor links ===
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -673,7 +759,6 @@
 
                 const onScroll = () => {
                     let currentSection = '';
-
                     mainSections.forEach(section => {
                         const sectionTop = section.offsetTop;
                         const sectionHeight = section.clientHeight;
@@ -702,44 +787,50 @@
             const responseArea = document.getElementById('ai-response-area');
             const loadingIndicator = document.getElementById('ai-loading');
 
-            // --- This is the context the AI will use to answer questions ---
-            // I've summarized your resume content here. (UPDATED)
+       
             const resumeContext = `
-                PROFILE: Senior iOS Developer with over 7 years of commercial experience, specializing in architecting complex, high-performance native iOS (Swift/SwiftUI) and cross-platform (Flutter) applications. A proponent of clean, maintainable code, I am deeply proficient in applying advanced architectural patterns like VIPER, MVVM, and Clean Architecture to build scalable, testable, and robust solutions. My approach is business-goal oriented, focusing on translating client needs into flawless, intuitive user experiences. This results-driven mindset is demonstrated by a 100% Job Success Rate and Top 10% Talent status on Upwork, reflecting a proven track record of delivering tangible value.
+                PROFILE: Results-oriented Senior iOS Engineer with 7+ years of experience in architecting scalable, high-performance mobile ecosystems. 
+                Specializes in designing modular architectures (MVP, MVVM, VIPER, Clean Architecture) for large-scale applications, ensuring maintainability for cross-functional teams.
+                Expertise includes technical leadership, defining development roadmaps, optimizing CI/CD pipelines, and solving complex challenges (real-time data sync, offline-first logic, memory optimization).
+                Focuses on aligning technical excellence with business KPIs. Recognized as Top 10% Talent on Upwork with a 100% Job Success Rate.
                 
                 SKILLS:
                 - Core: Swift, SwiftUI, UIKit, Objective-C, Flutter, Combine, Async/Await
-                - Architecture: MVVM, VIPER, Clean Architecture, TCA (Composable Architecture), SOLID Principles, Protocol-Oriented Programming, Concurrency Patterns, Scalable Solutions
+                - Architecture: MVP, MVVM, VIPER, Clean Architecture, TCA (Composable Architecture), SOLID Principles, Protocol-Oriented Programming, Concurrency Patterns, Scalable Solutions
                 - Tools: Xcode, Firebase, Git, REST API, WebSockets, CoreData / Realm, HealthKit, Core Location, Core Animation, Push Notifications, In-App Purchases, Stripe, MapBox, Unit/UI Testing (XCTest), CI/CD (Fastlane, GitHub Actions), Swift Package Manager (SPM)
                 
                 EXPERIENCE:
                 - Flutter Developer (Freelance, Jan 2023 - Present): Full lifecycle cross-platform (iOS/Android) development and publishing.
-                - Senior iOS Developer (NerdzLab, Jun 2018 - Oct 2024): End-to-end native iOS development, architectural design (VIPER, Clean), performance optimization (SaaS, Healthcare). Mentored junior devs, set CI/CD & testing best practices. Used UIKit & SwiftUI.
+                - Senior iOS Developer (NerdzLab, Jun 2018 - Oct 2024): End-to-end native iOS development, architectural design (MVP, MVVM, Clean), performance optimization (SaaS, Healthcare).
+                Mentored junior devs, set CI/CD & testing best practices. Used UIKit & SwiftUI.
                 - iOS Developer (CyberChisel, Oct 2017 - Jun 2018): Feature development and maintenance, focusing on clean code.
                 - iOS Developer (2Event, Apr 2017 - Oct 2017): Developed features for event management platform, integrated APIs, push notifications.
-                
-                PROJECTS (Selection from 20+):
-                - Hubmee: iOS client for personal organizer (calendar, notes, tasks, chat, AI, finance).
-                - Social Games (Mafia, Werewolf): Client-server mobile games, state sync via WebSockets.
-                - WordDuo: Micro-puzzle game.
-                - Construction Clock: GPS time tracker with background geolocation.
-                - RASHAKAN: Personal wellness guide with HealthKit integration.
-                - WHATSALON & GO: B2C/B2B ecosystem for salon booking with Stripe/PayPal.
-                - Truvay: Social rating app for places with MapBox/Google Maps.
+
+                PROJECTS:
+                - Hubmee (Personal Manager): iOS client (calendar, notes, tasks, chat, AI, finance). Swift, SwiftUI, WebSockets, Google/AI integration.
+                - GCTV: Video streaming/player, subscriptions, event schedules. Swift, WebSockets, Streaming.
+                - ConstructionClock: GPS time tracking, offline mode, payroll export, location tracking. Swift, PDF, Location.
+                - WordDuo: Word puzzle game, coins, ads, multiple modes. Swift, Firebase, Game Engine.
+                - WHATSALON & GO: B2C/B2B salon ecosystem (booking, clients, Stripe/PayPal).
+                - Mafia/Werewolf/Avalon: Real-time group games, client-server state sync via WebSockets.
+                - InvoiceBear: Invoice creation, estimates, PDF generation, Stripe integration. SwiftUI.
+                - LeMall Lebanon: Store directory, events, loyalty program, booking.
+                - 2Events: Ticket sales, social features, QR tickets, event organizing.
                 
                 EDUCATION: Engineer, Rzeszów University of Technology (2012-2014).
-                
                 LANGUAGES: Ukrainian (Native), English (Professional), Polish (Conversational).
             `;
             // --- End of resume context ---
 
-            const systemPrompt = `You are a professional AI assistant for Ostap Marchenko's interactive resume. Your role is to answer questions from recruiters and hiring managers based *only* on the information provided in the following resume context. Do not invent information or answer questions outside this context. If a question is off-topic (e.g., 'what is the weather?'), politely decline and redirect the user to ask about Ostap's skills or experience.
-            
+            const systemPrompt = `You are a professional AI assistant for Ostap Marchenko's interactive resume.
+            Your role is to answer questions from recruiters and hiring managers based *only* on the information provided in the following resume context.
+            Do not invent information or answer questions outside this context.
+            If a question is off-topic (e.g., 'what is the weather?'), politely decline and redirect the user to ask about Ostap's skills or experience.
             RESUME CONTEXT:
             ${resumeContext}`;
 
             const apiKey = ""; // API key will be injected by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
 
             // --- Helper Functions ---
             
@@ -824,14 +915,13 @@
                     promptInput.value = '';
                 }
             });
-            
+
             promptInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
                     sendButton.click();
                 }
             });
-            
         });
     </script>
 
